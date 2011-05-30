@@ -1,8 +1,11 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
 
+  # Added delegate
+  delegate :city, :country, :to => user
+
   def commenter_address
-    "#{self.user.address.city},#{self.user.address.country}"
+    "#{self.city},#{self.country}"
   end
 
   def self.recent(count)
@@ -10,11 +13,11 @@ class Comment < ActiveRecord::Base
   end
 
   def is_minimum_length?
-    if self.text.length < 4
-      return false
-    else
-      return true
-    end
+    self.text.size < 4 ? false : true
+  end
+
+  def to_s
+    "#{comment.user.login}::#{comment.commenter_address}"
   end
 end
 
