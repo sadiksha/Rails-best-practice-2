@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
       redirect_to user_post_path(current_user,@post)
     else
       flash[:notice] = "Comment has not been created."
-      render :action => "new"
+      render "new"
     end
   end
 
