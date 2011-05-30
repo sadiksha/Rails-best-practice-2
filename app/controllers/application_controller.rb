@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  layout 'application'
+  layout 'application', 'login_content'
+  helper_method :current_user, :logged_in?
 
   private
 
@@ -13,14 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   def login_required
-    redirect_to root_path, :notice => "You must be logged in to do that." if !logged_in?
+    redirect_to root_path, :notice => "You must be logged in to do that." unless logged_in?
   end
 
   def logged_in?
-    !!current_user
+    current_user
   end
-
-
-  helper_method :current_user, :logged_in?
 end
 
