@@ -13,8 +13,7 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = Comment.new(params[:comment])
-    @comment.post_id = @post.id
+    @comment = @post.comments.build(params[:comment])
     @comment.user_id = current_user.id
 
     if @comment.is_minimum_length? && @comment.save

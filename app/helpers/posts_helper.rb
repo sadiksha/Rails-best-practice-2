@@ -2,7 +2,8 @@ module PostsHelper
   def popular_post_div(posts, current_user)
     raw(
     posts.find_each do |post|
-      '<h4><%= link_to post, user_post_path(current_user,post) %></h4>'.'<%= post.text %>'.join("")
+      '<h4><%= link_to post, user_post_path(current_user,post) %></h4>'
+      yield
     end
     )
   end
