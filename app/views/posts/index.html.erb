@@ -1,14 +1,10 @@
 <h1>Posts</h1>
 
+<!--  Displaying popular posts used helper method -->
 <h2>What people are talking about</h2>
-<% @popular_posts.each do |post| %>
-  <h4><%= link_to "#{post.title} (#{post.comments.length})", user_post_path(current_user,post) %></h4>
-  <%= post.text %>
-<% end %>
+<%= popular_post_div(@popular_posts, current_user)%>
 
+<!-- Displaying posts used helper method -->
 <h2>All Posts</h2>
-<% for post in @posts %>
-  <h4><%= link_to "#{post.title} (#{post.comments.length})", user_post_path(current_user,post) %></h4>
-  <%= post.text %>
-<% end %>
+<%= popular_post_div(@posts, current_user)%>
 
